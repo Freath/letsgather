@@ -724,7 +724,7 @@
     observer.observe(el);
   });
 
-  // TYPING DIRECTION SCRIPT
+// TYPING DIRECTION SCRIPT
   const phrases = [
     "cycling to the pub on a summer evening",
     "watching a new film with friends",
@@ -734,7 +734,7 @@
   ];
 
   let phraseIndex = 0;
-  let charIndex = phrases[0].length; // Start fully typed for initial layout impact
+  let charIndex = phrases[0].length; 
   let isDeleting = false;
   const targetElement = document.getElementById("typed-phrase");
 
@@ -747,27 +747,22 @@
     const currentPhrase = phrases[phraseIndex];
     
     if (isDeleting) {
-      // Remove a character
       charIndex--;
-      targetElement.textContent = currentPhrase.substring(0, charIndex);
     } else {
-      // Add a character
       charIndex++;
-      targetElement.textContent = currentPhrase.substring(0, charIndex);
     }
 
-    // Logic switches
+    targetElement.textContent = currentPhrase.substring(0, charIndex);
+
+    // Logic switches (Cleaned up to prevent freeze-ups)
     if (!isDeleting && charIndex === currentPhrase.length) {
-      // Finished typing entire phrase -> Pause, then start deleting
       isDeleting = true;
       setTimeout(typeEffect, pauseTime);
     } else if (isDeleting && charIndex === 0) {
-      // Finished deleting -> Move to next phrase index
       isDeleting = false;
       phraseIndex = (phraseIndex + 1) % phrases.length;
-      setTimeout(typeEffect, 400); // Small brief rest pause before typing next
+      setTimeout(typeEffect, 400); 
     } else {
-      // Loop execution speed check based on active action state
       setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
     }
   }
