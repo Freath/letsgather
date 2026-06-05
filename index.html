@@ -309,7 +309,7 @@
   /* QUOTE SECTION */
   .quote-section {
     background: var(--dark-surface);
-    padding: 80px 40px;
+    padding: 100px 40px;
     text-align: center;
   }
 
@@ -317,15 +317,25 @@
     font-size: clamp(22px, 3.5vw, 36px);
     font-weight: 500;
     color: var(--surface);
-    line-height: 1.3;
-    max-width: 720px;
+    line-height: 1.4;
+    max-width: 850px;
     margin: 0 auto 20px;
     letter-spacing: -0.3px;
   }
 
-  .quote-text em {
+  /* Dynamic Text Styles */
+  .typing-target {
     color: var(--primary);
     font-style: normal;
+    border-right: 2px solid var(--primary);
+    padding-right: 2px;
+    animation: blink 0.75s step-end infinite;
+    white-space: pre-wrap;
+  }
+
+  @keyframes blink {
+    from, to { border-color: transparent }
+    50% { border-color: var(--primary); }
   }
 
   .quote-sub {
@@ -645,7 +655,7 @@
 <!-- QUOTE -->
 <div class="quote-section">
   <p class="quote-text">
-    "The feeling of <em>cycling to the pub</em> on a summer evening, already looking forward to it."
+    "The feeling of <span class="typing-target" id="typed-phrase">cycling to the pub on a summer evening</span>, already looking forward to it."
   </p>
   <p class="quote-sub">That's what Gather is for.</p>
 </div>
@@ -713,6 +723,57 @@
     el.style.transition = `opacity 0.5s ease ${i * 0.1}s, transform 0.5s ease ${i * 0.1}s`;
     observer.observe(el);
   });
+
+  // TYPING DIRECTION SCRIPT
+  const phrases = [
+    "cycling to the pub on a summer evening",
+    "watching a new film with friends",
+    "serving an ace on a sunny afternoon",
+    "having a great cocktail after work",
+    "grabbing a coffee on a lazy morning"
+  ];
+
+  let phraseIndex = 0;
+  let charIndex = phrases[0].length; // Start fully typed for initial layout impact
+  let isDeleting = false;
+  const targetElement = document.getElementById("typed-phrase");
+
+  // Speed timings (in milliseconds)
+  const typingSpeed = 60;
+  const deletingSpeed = 30;
+  const pauseTime = 2500; // How long it stays fully typed
+
+  function typeEffect() {
+    const currentPhrase = phrases[phraseIndex];
+    
+    if (isDeleting) {
+      // Remove a character
+      charIndex--;
+      targetElement.textContent = currentPhrase.substring(0, charIndex);
+    } else {
+      // Add a character
+      charIndex++;
+      targetElement.textContent = currentPhrase.substring(0, charIndex);
+    }
+
+    // Logic switches
+    if (!isDeleting && charIndex === currentPhrase.length) {
+      // Finished typing entire phrase -> Pause, then start deleting
+      isDeleting = true;
+      setTimeout(typeEffect, pauseTime);
+    } else if (isDeleting && charIndex === 0) {
+      // Finished deleting -> Move to next phrase index
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      setTimeout(typeEffect, 400); // Small brief rest pause before typing next
+    } else {
+      // Loop execution speed check based on active action state
+      setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
+    }
+  }
+
+  // Fire typing engine after slight delay on load
+  setTimeout(typeEffect, pauseTime);
 </script>
 </body>
 </html>
