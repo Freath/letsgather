@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gather — Find somewhere in the middle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #C4673A;
+    --primary-hover: #D4784D;
+    --primary-dark: #7A3C1E;
+    --accent: #4A8C6E;
+    --surface: #F7F2EC;
+    --surface-raised: #EDE7DD;
+    --border: #D6CFC4;
+    --heading: #2C2820;
+    --text: #4A4540;
+    --text-secondary: #7A736A;
+    --text-muted: #B0A89C;
+    --dark-surface: #2C2820;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Figtree', sans-serif;
+    font-weight: 400;
+    background: var(--surface);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+  }
+
+  .nav-logo {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--primary);
+    letter-spacing: -0.3px;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .nav-links a:hover { color: var(--heading); }
+
+  .nav-cta {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--primary) !important;
+    border: 1.5px solid var(--primary);
+    padding: 8px 18px;
+    border-radius: 20px;
+    transition: background 0.15s ease, color 0.15s ease !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--primary) !important;
+    color: var(--surface) !important;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* MAP BACKGROUND */
+  .map-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* warm road grid */
+  .map-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.35;
+  }
+
+  /* diagonal warmth */
+  .map-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 70% at 50% 50%, transparent 40%, rgba(196,103,58,0.04) 100%);
+  }
+
+  /* HERO CONTENT */
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 0 24px;
+    max-width: 560px;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--primary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid rgba(196,103,58,0.3);
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    background: rgba(247,242,236,0.8);
+  }
+
+  .hero-title {
+    font-size: clamp(48px, 8vw, 80px);
+    font-weight: 500;
+    color: var(--heading);
+    line-height: 1.0;
+    letter-spacing: -1.5px;
+    margin-bottom: 20px;
+  }
+
+  .hero-title span {
+    color: var(--primary);
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+
+  /* SIGNUP FORM */
+  .signup-form {
+    display: flex;
+    gap: 10px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .signup-input {
+    flex: 1;
+    height: 48px;
+    padding: 0 16px;
+    font-family: 'Figtree', sans-serif;
+    font-size: 15px;
+    color: var(--heading);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .signup-input::placeholder { color: var(--text-muted); }
+  .signup-input:focus {
+    border-color: var(--primary);
+    background: #FDF0EA;
+  }
+
+  .signup-btn {
+    height: 48px;
+    padding: 0 24px;
+    font-family: 'Figtree', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--surface);
+    background: var(--primary);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.1s ease, background 0.15s ease;
+  }
+
+  .signup-btn:hover { background: var(--primary-hover); }
+  .signup-btn:active { transform: scale(0.96); }
+
+  .signup-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  /* MAP SVG ANIMATION LAYER */
+  .map-animation {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  /* SECTION: HOW IT WORKS */
+  .section {
+    padding: 100px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--primary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 500;
+    color: var(--heading);
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    max-width: 500px;
+    margin-bottom: 64px;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  @media (max-width: 700px) {
+    .steps-grid { grid-template-columns: 1fr; }
+  }
+
+  .step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 24px;
+  }
+
+  .step-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #FDF0EA;
+    border: 1px solid rgba(196,103,58,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--primary);
+    margin-bottom: 20px;
+  }
+
+  .step-title {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--heading);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .step-body {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* QUOTE SECTION */
+  .quote-section {
+    background: var(--dark-surface);
+    padding: 80px 40px;
+    text-align: center;
+  }
+
+  .quote-text {
+    font-size: clamp(22px, 3.5vw, 36px);
+    font-weight: 500;
+    color: var(--surface);
+    line-height: 1.3;
+    max-width: 720px;
+    margin: 0 auto 20px;
+    letter-spacing: -0.3px;
+  }
+
+  .quote-text em {
+    color: var(--primary);
+    font-style: normal;
+  }
+
+  .quote-sub {
+    font-size: 14px;
+    color: rgba(247,242,236,0.45);
+  }
+
+  /* FOOTER CTA */
+  .footer-cta {
+    padding: 100px 40px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-cta-title {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 500;
+    color: var(--heading);
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .footer-cta-sub {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+  }
+
+  .footer-cta .signup-form {
+    margin: 0 auto;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+  }
+
+  footer .logo {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--primary);
+  }
+
+  footer p {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* AVATAR PINS on map */
+  .pin {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .pin.visible { opacity: 1; }
+
+  .pin-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--surface);
+    border: 2.5px solid var(--surface);
+    box-shadow: 0 0 0 2.5px var(--primary);
+    position: relative;
+    z-index: 2;
+  }
+
+  .pin-tail {
+    width: 2px;
+    height: 8px;
+    background: var(--border);
+    margin-top: -1px;
+  }
+
+  /* MEET PIN */
+  .meet-pin {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 20;
+  }
+
+  .meet-core {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 3px solid var(--surface);
+    position: relative;
+    z-index: 3;
+  }
+
+  .meet-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1.5px solid var(--primary);
+    animation: pulse-out 2s ease-out infinite;
+  }
+
+  .meet-pulse:nth-child(1) { width: 20px; height: 20px; animation-delay: 0s; }
+  .meet-pulse:nth-child(2) { width: 20px; height: 20px; animation-delay: 0.35s; }
+  .meet-pulse:nth-child(3) { width: 20px; height: 20px; animation-delay: 0.7s; }
+
+  @keyframes pulse-out {
+    0%   { width: 20px; height: 20px; opacity: 0.3; }
+    100% { width: 80px; height: 80px; opacity: 0; }
+  }
+
+  /* Success state after submit */
+  .success-msg {
+    display: none;
+    padding: 14px 20px;
+    background: #EAF4EE;
+    border: 1px solid rgba(74,140,110,0.3);
+    border-radius: 10px;
+    color: #2A5C42;
+    font-size: 15px;
+    font-weight: 500;
+    max-width: 420px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .section { padding: 60px 20px; }
+    .signup-form { flex-direction: column; }
+    .signup-btn { width: 100%; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Gather</a>
+  <ul class="nav-links">
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#signup" class="nav-cta">Get early access</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+  <!-- Warm map background -->
+  <div class="map-bg"></div>
+
+  <!-- Animated SVG layer — converging paths -->
+  <svg class="map-animation" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="dot" markerWidth="6" markerHeight="6" refX="3" refY="3">
+        <circle cx="3" cy="3" r="2" fill="#C4673A" opacity="0.5"/>
+      </marker>
+    </defs>
+
+    <!-- Background warm road lines -->
+    <line x1="0" y1="200" x2="1440" y2="200" stroke="#D6CFC4" stroke-width="2" opacity="0.4"/>
+    <line x1="0" y1="450" x2="1440" y2="450" stroke="#D6CFC4" stroke-width="3" opacity="0.5"/>
+    <line x1="0" y1="700" x2="1440" y2="700" stroke="#D6CFC4" stroke-width="2" opacity="0.4"/>
+    <line x1="200" y1="0" x2="200" y2="900" stroke="#D6CFC4" stroke-width="2" opacity="0.4"/>
+    <line x1="500" y1="0" x2="500" y2="900" stroke="#D6CFC4" stroke-width="2" opacity="0.3"/>
+    <line x1="720" y1="0" x2="720" y2="900" stroke="#D6CFC4" stroke-width="3" opacity="0.5"/>
+    <line x1="940" y1="0" x2="940" y2="900" stroke="#D6CFC4" stroke-width="2" opacity="0.3"/>
+    <line x1="1240" y1="0" x2="1240" y2="900" stroke="#D6CFC4" stroke-width="2" opacity="0.4"/>
+
+    <!-- Diagonal road -->
+    <line x1="0" y1="600" x2="600" y2="200" stroke="#D6CFC4" stroke-width="2" opacity="0.3"/>
+    <line x1="840" y1="700" x2="1440" y2="300" stroke="#D6CFC4" stroke-width="2" opacity="0.3"/>
+
+    <!-- Converging path lines — 5 friends approaching the center (720, 450) -->
+    <!-- From top-left -->
+    <path id="path1" d="M 140 80 L 140 450 L 720 450" stroke="#C4673A" stroke-width="2" fill="none" opacity="0.18" stroke-dasharray="8 6"/>
+    <!-- From top-right -->
+    <path id="path2" d="M 1300 120 L 1300 450 L 720 450" stroke="#C4673A" stroke-width="2" fill="none" opacity="0.18" stroke-dasharray="8 6"/>
+    <!-- From bottom-left -->
+    <path id="path3" d="M 80 820 L 500 820 L 500 450 L 720 450" stroke="#C4673A" stroke-width="2" fill="none" opacity="0.18" stroke-dasharray="8 6"/>
+    <!-- From bottom-right -->
+    <path id="path4" d="M 1380 780 L 940 780 L 940 450 L 720 450" stroke="#C4673A" stroke-width="2" fill="none" opacity="0.18" stroke-dasharray="8 6"/>
+    <!-- From far left -->
+    <path id="path5" d="M 20 450 L 720 450" stroke="#C4673A" stroke-width="2" fill="none" opacity="0.18" stroke-dasharray="8 6"/>
+
+    <!-- Animated friend dots travelling along paths -->
+    <!-- Friend 1 — top left -->
+    <circle r="7" fill="#8C6E4A" stroke="#F7F2EC" stroke-width="2" opacity="0">
+      <animateMotion dur="6s" repeatCount="indefinite" begin="0s">
+        <mpath href="#path1"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.05;0.1;0.9;1" dur="6s" repeatCount="indefinite" begin="0s"/>
+    </circle>
+
+    <!-- Friend 2 — top right -->
+    <circle r="7" fill="#4A6E8C" stroke="#F7F2EC" stroke-width="2" opacity="0">
+      <animateMotion dur="6s" repeatCount="indefinite" begin="1s">
+        <mpath href="#path2"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.05;0.1;0.9;1" dur="6s" repeatCount="indefinite" begin="1s"/>
+    </circle>
+
+    <!-- Friend 3 — bottom left -->
+    <circle r="7" fill="#6E4A8C" stroke="#F7F2EC" stroke-width="2" opacity="0">
+      <animateMotion dur="7s" repeatCount="indefinite" begin="0.5s">
+        <mpath href="#path3"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.04;0.1;0.9;1" dur="7s" repeatCount="indefinite" begin="0.5s"/>
+    </circle>
+
+    <!-- Friend 4 — bottom right -->
+    <circle r="7" fill="#4A8C6E" stroke="#F7F2EC" stroke-width="2" opacity="0">
+      <animateMotion dur="5.5s" repeatCount="indefinite" begin="1.8s">
+        <mpath href="#path4"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.05;0.1;0.9;1" dur="5.5s" repeatCount="indefinite" begin="1.8s"/>
+    </circle>
+
+    <!-- Friend 5 — far left -->
+    <circle r="7" fill="#8C4A6E" stroke="#F7F2EC" stroke-width="2" opacity="0">
+      <animateMotion dur="4.5s" repeatCount="indefinite" begin="2.5s">
+        <mpath href="#path5"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.06;0.12;0.9;1" dur="4.5s" repeatCount="indefinite" begin="2.5s"/>
+    </circle>
+
+    <!-- The Meet pulse rings at centre -->
+    <circle cx="720" cy="450" r="12" fill="#C4673A" stroke="#F7F2EC" stroke-width="3"/>
+    <circle cx="720" cy="450" r="12" fill="none" stroke="#C4673A" stroke-width="1.5" opacity="0.25">
+      <animate attributeName="r" from="12" to="50" dur="2s" repeatCount="indefinite" begin="0s"/>
+      <animate attributeName="opacity" from="0.25" to="0" dur="2s" repeatCount="indefinite" begin="0s"/>
+    </circle>
+    <circle cx="720" cy="450" r="12" fill="none" stroke="#C4673A" stroke-width="1.5" opacity="0.15">
+      <animate attributeName="r" from="12" to="50" dur="2s" repeatCount="indefinite" begin="0.35s"/>
+      <animate attributeName="opacity" from="0.15" to="0" dur="2s" repeatCount="indefinite" begin="0.35s"/>
+    </circle>
+    <circle cx="720" cy="450" r="12" fill="none" stroke="#C4673A" stroke-width="1.5" opacity="0.08">
+      <animate attributeName="r" from="12" to="50" dur="2s" repeatCount="indefinite" begin="0.7s"/>
+      <animate attributeName="opacity" from="0.08" to="0" dur="2s" repeatCount="indefinite" begin="0.7s"/>
+    </circle>
+  </svg>
+
+  <!-- Hero text + form -->
+  <div class="hero-content">
+    <span class="hero-eyebrow">Now in early access</span>
+    <h1 class="hero-title">
+      Find somewhere<br><span>in the middle.</span>
+    </h1>
+    <p class="hero-sub">
+      Gather calculates the fairest place to meet your friends — then finds somewhere worth going.
+    </p>
+
+    <div id="signup-form-wrapper">
+      <form class="signup-form" id="signup-form" onsubmit="handleSignup(event)">
+        <input
+          class="signup-input"
+          type="email"
+          placeholder="your@email.com"
+          required
+          id="email-input"
+        />
+        <button class="signup-btn" type="submit">Get early access</button>
+      </form>
+      <p class="signup-hint">Invite-only. London first. No spam.</p>
+    </div>
+
+    <div class="success-msg" id="success-msg">
+      ✓ You're on the list. We'll be in touch.
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section">
+    <p class="section-label">How it works</p>
+    <h2 class="section-title">Less group chat. More actually meeting up.</h2>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3 class="step-title">Everyone shares where they are</h3>
+        <p class="step-body">Gather knows where your friends are starting from — their home, their office, wherever they are when you decide to meet.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3 class="step-title">We find the fair middle</h3>
+        <p class="step-body">Not just the geographic centre — the point where nobody's travel time is unfair. Scored on walk, cycle, and transit.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3 class="step-title">Pick somewhere worth going</h3>
+        <p class="step-body">Ranked venues near the midpoint, tuned to what you're after — a pint, a coffee, a run, a bite. Filtered by what your friends have already loved.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <p class="quote-text">
+    "The feeling of <em>cycling to the pub</em> on a summer evening, already looking forward to it."
+  </p>
+  <p class="quote-sub">That's what Gather is for.</p>
+</div>
+
+<!-- FOOTER CTA -->
+<section id="signup" class="footer-cta">
+  <h2 class="footer-cta-title">Be the first to try it.</h2>
+  <p class="footer-cta-sub">London-first, invite-only. Sign up and we'll reach out when a spot opens up.</p>
+  <div id="footer-form-wrapper">
+    <form class="signup-form" id="footer-signup-form" onsubmit="handleFooterSignup(event)">
+      <input
+        class="signup-input"
+        type="email"
+        placeholder="your@email.com"
+        required
+        id="footer-email-input"
+      />
+      <button class="signup-btn" type="submit">Request access</button>
+    </form>
+    <p class="signup-hint">No spam. Just Gather, when it's ready for you.</p>
+  </div>
+  <div class="success-msg" id="footer-success-msg">
+    ✓ You're on the list. We'll be in touch.
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="logo">Gather</span>
+  <p>© 2026 Gather. London.</p>
+</footer>
+
+<script>
+  function handleSignup(e) {
+    e.preventDefault();
+    const email = document.getElementById('email-input').value;
+    if (!email) return;
+    document.getElementById('signup-form-wrapper').style.display = 'none';
+    const msg = document.getElementById('success-msg');
+    msg.style.display = 'block';
+  }
+
+  function handleFooterSignup(e) {
+    e.preventDefault();
+    const email = document.getElementById('footer-email-input').value;
+    if (!email) return;
+    document.getElementById('footer-form-wrapper').style.display = 'none';
+    const msg = document.getElementById('footer-success-msg');
+    msg.style.display = 'block';
+  }
+
+  // Stagger-reveal sections on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.style.opacity = '1';
+        el.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.step-card').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = `opacity 0.5s ease ${i * 0.1}s, transform 0.5s ease ${i * 0.1}s`;
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
