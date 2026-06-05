@@ -108,7 +108,6 @@
     height: 100%;
   }
 
-  /* warm road grid */
   .map-bg::before {
     content: '';
     position: absolute;
@@ -120,7 +119,6 @@
     opacity: 0.35;
   }
 
-  /* diagonal warmth */
   .map-bg::after {
     content: '';
     position: absolute;
@@ -323,7 +321,6 @@
     letter-spacing: -0.3px;
   }
 
-  /* Dynamic Text Styles */
   .typing-target {
     color: var(--primary);
     font-style: normal;
@@ -364,10 +361,6 @@
     margin-bottom: 40px;
   }
 
-  .footer-cta .signup-form {
-    margin: 0 auto;
-  }
-
   /* FOOTER */
   footer {
     padding: 32px 40px;
@@ -386,79 +379,6 @@
   footer p {
     font-size: 12px;
     color: var(--text-muted);
-  }
-
-  /* AVATAR PINS on map */
-  .pin {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-  }
-
-  .pin.visible { opacity: 1; }
-
-  .pin-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--surface);
-    border: 2.5px solid var(--surface);
-    box-shadow: 0 0 0 2.5px var(--primary);
-    position: relative;
-    z-index: 2;
-  }
-
-  .pin-tail {
-    width: 2px;
-    height: 8px;
-    background: var(--border);
-    margin-top: -1px;
-  }
-
-  /* MEET PIN */
-  .meet-pin {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 20;
-  }
-
-  .meet-core {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--primary);
-    border: 3px solid var(--surface);
-    position: relative;
-    z-index: 3;
-  }
-
-  .meet-pulse {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    border: 1.5px solid var(--primary);
-    animation: pulse-out 2s ease-out infinite;
-  }
-
-  .meet-pulse:nth-child(1) { width: 20px; height: 20px; animation-delay: 0s; }
-  .meet-pulse:nth-child(2) { width: 20px; height: 20px; animation-delay: 0.35s; }
-  .meet-pulse:nth-child(3) { width: 20px; height: 20px; animation-delay: 0.7s; }
-
-  @keyframes pulse-out {
-    0%   { width: 20px; height: 20px; opacity: 0.3; }
-    100% { width: 80px; height: 80px; opacity: 0; }
   }
 
   /* Success state after submit */
@@ -488,7 +408,6 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">Gather</a>
   <ul class="nav-links">
@@ -497,21 +416,10 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-
-  <!-- Warm map background -->
   <div class="map-bg"></div>
 
-  <!-- Animated SVG layer — converging paths -->
   <svg class="map-animation" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <marker id="dot" markerWidth="6" markerHeight="6" refX="3" refY="3">
-        <circle cx="3" cy="3" r="2" fill="#C4673A" opacity="0.5"/>
-      </marker>
-    </defs>
-
-    <!-- Background warm road lines -->
     <line x1="0" y1="200" x2="1440" y2="200" stroke="#D6CFC4" stroke-width="2" opacity="0.4"/>
     <line x1="0" y1="450" x2="1440" y2="450" stroke="#D6CFC4" stroke-width="3" opacity="0.5"/>
     <line x1="0" y1="700" x2="1440" y2="700" stroke="#D6CFC4" stroke-width="2" opacity="0.4"/>
@@ -520,65 +428,36 @@
     <line x1="720" y1="0" x2="720" y2="900" stroke="#D6CFC4" stroke-width="3" opacity="0.5"/>
     <line x1="940" y1="0" x2="940" y2="900" stroke="#D6CFC4" stroke-width="2" opacity="0.3"/>
     <line x1="1240" y1="0" x2="1240" y2="900" stroke="#D6CFC4" stroke-width="2" opacity="0.4"/>
-
-    <!-- Diagonal road -->
     <line x1="0" y1="600" x2="600" y2="200" stroke="#D6CFC4" stroke-width="2" opacity="0.3"/>
     <line x1="840" y1="700" x2="1440" y2="300" stroke="#D6CFC4" stroke-width="2" opacity="0.3"/>
 
-    <!-- Converging path lines — 5 friends approaching the center (720, 450) -->
-    <!-- From top-left -->
     <path id="path1" d="M 140 80 L 140 450 L 720 450" stroke="#C4673A" stroke-width="2" fill="none" opacity="0.18" stroke-dasharray="8 6"/>
-    <!-- From top-right -->
     <path id="path2" d="M 1300 120 L 1300 450 L 720 450" stroke="#C4673A" stroke-width="2" fill="none" opacity="0.18" stroke-dasharray="8 6"/>
-    <!-- From bottom-left -->
     <path id="path3" d="M 80 820 L 500 820 L 500 450 L 720 450" stroke="#C4673A" stroke-width="2" fill="none" opacity="0.18" stroke-dasharray="8 6"/>
-    <!-- From bottom-right -->
     <path id="path4" d="M 1380 780 L 940 780 L 940 450 L 720 450" stroke="#C4673A" stroke-width="2" fill="none" opacity="0.18" stroke-dasharray="8 6"/>
-    <!-- From far left -->
     <path id="path5" d="M 20 450 L 720 450" stroke="#C4673A" stroke-width="2" fill="none" opacity="0.18" stroke-dasharray="8 6"/>
 
-    <!-- Animated friend dots travelling along paths -->
-    <!-- Friend 1 — top left -->
     <circle r="7" fill="#8C6E4A" stroke="#F7F2EC" stroke-width="2" opacity="0">
-      <animateMotion dur="6s" repeatCount="indefinite" begin="0s">
-        <mpath href="#path1"/>
-      </animateMotion>
+      <animateMotion dur="6s" repeatCount="indefinite" begin="0s"><mpath href="#path1"/></animateMotion>
       <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.05;0.1;0.9;1" dur="6s" repeatCount="indefinite" begin="0s"/>
     </circle>
-
-    <!-- Friend 2 — top right -->
     <circle r="7" fill="#4A6E8C" stroke="#F7F2EC" stroke-width="2" opacity="0">
-      <animateMotion dur="6s" repeatCount="indefinite" begin="1s">
-        <mpath href="#path2"/>
-      </animateMotion>
+      <animateMotion dur="6s" repeatCount="indefinite" begin="1s"><mpath href="#path2"/></animateMotion>
       <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.05;0.1;0.9;1" dur="6s" repeatCount="indefinite" begin="1s"/>
     </circle>
-
-    <!-- Friend 3 — bottom left -->
     <circle r="7" fill="#6E4A8C" stroke="#F7F2EC" stroke-width="2" opacity="0">
-      <animateMotion dur="7s" repeatCount="indefinite" begin="0.5s">
-        <mpath href="#path3"/>
-      </animateMotion>
+      <animateMotion dur="7s" repeatCount="indefinite" begin="0.5s"><mpath href="#path3"/></animateMotion>
       <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.04;0.1;0.9;1" dur="7s" repeatCount="indefinite" begin="0.5s"/>
     </circle>
-
-    <!-- Friend 4 — bottom right -->
     <circle r="7" fill="#4A8C6E" stroke="#F7F2EC" stroke-width="2" opacity="0">
-      <animateMotion dur="5.5s" repeatCount="indefinite" begin="1.8s">
-        <mpath href="#path4"/>
-      </animateMotion>
+      <animateMotion dur="5.5s" repeatCount="indefinite" begin="1.8s"><mpath href="#path4"/></animateMotion>
       <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.05;0.1;0.9;1" dur="5.5s" repeatCount="indefinite" begin="1.8s"/>
     </circle>
-
-    <!-- Friend 5 — far left -->
     <circle r="7" fill="#8C4A6E" stroke="#F7F2EC" stroke-width="2" opacity="0">
-      <animateMotion dur="4.5s" repeatCount="indefinite" begin="2.5s">
-        <mpath href="#path5"/>
-      </animateMotion>
+      <animateMotion dur="4.5s" repeatCount="indefinite" begin="2.5s"><mpath href="#path5"/></animateMotion>
       <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.06;0.12;0.9;1" dur="4.5s" repeatCount="indefinite" begin="2.5s"/>
     </circle>
 
-    <!-- The Meet pulse rings at centre -->
     <circle cx="720" cy="450" r="12" fill="#C4673A" stroke="#F7F2EC" stroke-width="3"/>
     <circle cx="720" cy="450" r="12" fill="none" stroke="#C4673A" stroke-width="1.5" opacity="0.25">
       <animate attributeName="r" from="12" to="50" dur="2s" repeatCount="indefinite" begin="0s"/>
@@ -588,43 +467,25 @@
       <animate attributeName="r" from="12" to="50" dur="2s" repeatCount="indefinite" begin="0.35s"/>
       <animate attributeName="opacity" from="0.15" to="0" dur="2s" repeatCount="indefinite" begin="0.35s"/>
     </circle>
-    <circle cx="720" cy="450" r="12" fill="none" stroke="#C4673A" stroke-width="1.5" opacity="0.08">
-      <animate attributeName="r" from="12" to="50" dur="2s" repeatCount="indefinite" begin="0.7s"/>
-      <animate attributeName="opacity" from="0.08" to="0" dur="2s" repeatCount="indefinite" begin="0.7s"/>
-    </circle>
   </svg>
 
-  <!-- Hero text + form -->
   <div class="hero-content">
     <span class="hero-eyebrow">Now in early access</span>
-    <h1 class="hero-title">
-      Find somewhere<br><span>in the middle.</span>
-    </h1>
-    <p class="hero-sub">
-      Gather calculates the fairest place to meet your friends — then finds somewhere worth going.
-    </p>
+    <h1 class="hero-title">Find somewhere<br><span>in the middle.</span></h1>
+    <p class="hero-sub">Gather calculates the fairest place to meet your friends — then finds somewhere worth going.</p>
 
     <div id="signup-form-wrapper">
       <form class="signup-form" id="signup-form" onsubmit="handleSignup(event)">
-        <input
-          class="signup-input"
-          type="email"
-          placeholder="your@email.com"
-          required
-          id="email-input"
-        />
+        <input class="signup-input" type="email" placeholder="your@email.com" required id="email-input" />
         <button class="signup-btn" type="submit">Get early access</button>
       </form>
       <p class="signup-hint">Invite-only. London first. No spam.</p>
     </div>
 
-    <div class="success-msg" id="success-msg">
-      ✓ You're on the list. We'll be in touch.
-    </div>
+    <div class="success-msg" id="success-msg">✓ You're on the list. We'll be in touch.</div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
 <section id="how">
   <div class="section">
     <p class="section-label">How it works</p>
@@ -636,13 +497,11 @@
         <h3 class="step-title">Everyone shares where they are</h3>
         <p class="step-body">Gather knows where your friends are starting from: their home, their office, wherever they are when you decide to meet.</p>
       </div>
-
       <div class="step-card">
         <div class="step-number">2</div>
         <h3 class="step-title">We find the fair middle</h3>
         <p class="step-body">Not just the geographic centre, the point where nobody's travel time is unfair. Scored on walk, cycle, and public transport.</p>
       </div>
-
       <div class="step-card">
         <div class="step-number">3</div>
         <h3 class="step-title">Pick somewhere worth going</h3>
@@ -652,7 +511,6 @@
   </div>
 </section>
 
-<!-- QUOTE -->
 <div class="quote-section">
   <p class="quote-text">
     "The feeling of <span class="typing-target" id="typed-phrase">cycling to the pub on a summer evening</span>, already looking forward to it."
@@ -660,29 +518,19 @@
   <p class="quote-sub">That's what Gather is for.</p>
 </div>
 
-<!-- FOOTER CTA -->
 <section id="signup" class="footer-cta">
   <h2 class="footer-cta-title">Be the first to try it.</h2>
   <p class="footer-cta-sub">London-first, invite-only. Sign up and we'll reach out when a spot opens up.</p>
   <div id="footer-form-wrapper">
     <form class="signup-form" id="footer-signup-form" onsubmit="handleFooterSignup(event)">
-      <input
-        class="signup-input"
-        type="email"
-        placeholder="your@email.com"
-        required
-        id="footer-email-input"
-      />
+      <input class="signup-input" type="email" placeholder="your@email.com" required id="footer-email-input" />
       <button class="signup-btn" type="submit">Request access</button>
     </form>
     <p class="signup-hint">No spam. Just Gather, when it's ready for you.</p>
   </div>
-  <div class="success-msg" id="footer-success-msg">
-    ✓ You're on the list. We'll be in touch.
-  </div>
+  <div class="success-msg" id="footer-success-msg">✓ You're on the list. We'll be in touch.</div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <span class="logo">Gather</span>
   <p>© 2026 Gather. London.</p>
@@ -694,8 +542,7 @@
     const email = document.getElementById('email-input').value;
     if (!email) return;
     document.getElementById('signup-form-wrapper').style.display = 'none';
-    const msg = document.getElementById('success-msg');
-    msg.style.display = 'block';
+    document.getElementById('success-msg').style.display = 'block';
   }
 
   function handleFooterSignup(e) {
@@ -703,11 +550,10 @@
     const email = document.getElementById('footer-email-input').value;
     if (!email) return;
     document.getElementById('footer-form-wrapper').style.display = 'none';
-    const msg = document.getElementById('footer-success-msg');
-    msg.style.display = 'block';
+    document.getElementById('footer-success-msg').style.display = 'block';
   }
 
-  // Stagger-reveal sections on scroll
+  // Stagger-reveal cards
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(el => {
       if (el.isIntersecting) {
@@ -724,7 +570,7 @@
     observer.observe(el);
   });
 
-// TYPING DIRECTION SCRIPT
+  // CLEAN TYPING SYSTEM
   const phrases = [
     "cycling to the pub on a summer evening",
     "watching a new film with friends",
@@ -738,10 +584,9 @@
   let isDeleting = false;
   const targetElement = document.getElementById("typed-phrase");
 
-  // Speed timings (in milliseconds)
   const typingSpeed = 60;
   const deletingSpeed = 30;
-  const pauseTime = 2500; // How long it stays fully typed
+  const pauseTime = 2500; 
 
   function typeEffect() {
     const currentPhrase = phrases[phraseIndex];
@@ -754,7 +599,6 @@
 
     targetElement.textContent = currentPhrase.substring(0, charIndex);
 
-    // Logic switches (Cleaned up to prevent freeze-ups)
     if (!isDeleting && charIndex === currentPhrase.length) {
       isDeleting = true;
       setTimeout(typeEffect, pauseTime);
@@ -767,7 +611,7 @@
     }
   }
 
-  // Fire typing engine after slight delay on load
+  // Start the loop sequence
   setTimeout(typeEffect, pauseTime);
 </script>
 </body>
