@@ -537,9 +537,87 @@
 </footer>
 
 <script>
-  // 1. SIGNUP LOGIC
+  /* ── TYPING ANIMATION ───────────────────────── */
+  const phrases = [
+    "cycling to the pub on a summer evening",
+    "already on your way to see them",
+    "the group chat finally picking a place",
+    "a round in the garden on a Thursday",
+    "nobody travelling more than they should",
+  ];
+
+  let phraseIndex = 0;
+  let charIndex = phrases[0].length;
+  let isDeleting = false;
+  const typedEl = document.getElementById('typed-phrase');
+
+  function typeLoop() {
+    const current = phrases[phraseIndex];
+
+    if (isDeleting) {
+      charIndex--;
+      typedEl.textContent = current.substring(0, charIndex);
+    } else {
+      charIndex++;
+      typedEl.textContent = current.substring(0, charIndex);
+    }
+
+    if (!isDeleting && charIndex === current.length) {
+      isDeleting = true;
+      setTimeout(typeLoop, 2400);
+      return;
+    }
+
+    if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      setTimeout(typeLoop, 400);
+      return;
+    }
+
+    setTimeout(typeLoop, isDeleting ? 28 : 65);
+  }
+
+  setTimeout(typeLoop, 900);
+
+
+  /* ── EMAIL SUBMISSION ───────────────────────── */
+  async function submitEmail(email, wrapperId, successId, btnEl) {
+    const originalText = btnEl.textContent;
+    btnEl.textContent = '…';
+    btnEl.disabled = true;
+
+    try {
+      const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      if (res.ok) {
+        document.getElementById(wrapperId).style.display = 'none';
+        document.getElementById(successId).style.display = 'block';
+      } else {
+        btnEl.textContent = 'Try again';
+        btnEl.disabled = false;
+      }
+    } catch {
+      btnEl.textContent = 'Try again';
+      btnEl.disabled = false;
+    }
+  }
+
   function handleSignup(e) {
     e.preventDefault();
     const email = document.getElementById('email-input').value;
-    if (!email) return;
-    document.getElementById('signup-form-wrapper').style.display = 'none';
+    const btn = e.target.querySelector('button');
+    submitEmail(email, 'signup-form-wrapper', 'success-msg', btn);
+  }
+
+  function handleFooterSignup(e) {
+    e.preventDefault();
+    const email = document.getElementById('footer-email-input').value;
+    const btn = e.target.querySelector('button');
+    submitEmail(email, 'footer-form-wrapper', 'footer-success-msg', btn);
+  }
+</script>
