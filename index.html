@@ -39,9 +39,7 @@
   /* NAV */
   nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     z-index: 100;
     display: flex;
     align-items: center;
@@ -100,7 +98,6 @@
     overflow: hidden;
   }
 
-  /* MAP BACKGROUND */
   .map-bg {
     position: absolute;
     inset: 0;
@@ -126,7 +123,6 @@
     background: radial-gradient(ellipse 80% 70% at 50% 50%, transparent 40%, rgba(196,103,58,0.04) 100%);
   }
 
-  /* HERO CONTENT */
   .hero-content {
     position: relative;
     z-index: 10;
@@ -158,9 +154,7 @@
     margin-bottom: 20px;
   }
 
-  .hero-title span {
-    color: var(--primary);
-  }
+  .hero-title span { color: var(--primary); }
 
   .hero-sub {
     font-size: 17px;
@@ -223,7 +217,7 @@
     text-align: center;
   }
 
-  /* MAP SVG ANIMATION LAYER */
+  /* MAP ANIMATION */
   .map-animation {
     position: absolute;
     inset: 0;
@@ -232,7 +226,7 @@
     pointer-events: none;
   }
 
-  /* SECTION: HOW IT WORKS */
+  /* HOW IT WORKS */
   .section {
     padding: 100px 40px;
     max-width: 1100px;
@@ -331,7 +325,7 @@
   }
 
   @keyframes blink {
-    from, to { border-color: transparent }
+    from, to { border-color: transparent; }
     50% { border-color: var(--primary); }
   }
 
@@ -381,7 +375,7 @@
     color: var(--text-muted);
   }
 
-  /* Success state after submit */
+  /* SUCCESS STATE */
   .success-msg {
     display: none;
     padding: 14px 20px;
@@ -481,7 +475,6 @@
       </form>
       <p class="signup-hint">Invite-only. London first. No spam.</p>
     </div>
-
     <div class="success-msg" id="success-msg">✓ You're on the list. We'll be in touch.</div>
   </div>
 </section>
@@ -490,7 +483,6 @@
   <div class="section">
     <p class="section-label">How it works</p>
     <h2 class="section-title">Less group chat. More meet up.</h2>
-
     <div class="steps-grid">
       <div class="step-card">
         <div class="step-number">1</div>
@@ -537,31 +529,30 @@
 </footer>
 
 <script>
-  /* ── TYPING ANIMATION ───────────────────────── */
-  const phrases = [
+  /* ── TYPING ANIMATION ── */
+  var phrases = [
     "cycling to the pub on a summer evening",
     "already on your way to see them",
     "the group chat finally picking a place",
     "a round in the garden on a Thursday",
-    "nobody travelling more than they should",
+    "nobody travelling more than they should"
   ];
 
-  let phraseIndex = 0;
-  let charIndex = phrases[0].length;
-  let isDeleting = false;
-  const typedEl = document.getElementById('typed-phrase');
+  var phraseIndex = 0;
+  var charIndex = 0;
+  var isDeleting = false;
+  var typedEl = document.getElementById('typed-phrase');
 
   function typeLoop() {
-    console.log('tick', charIndex);
-    const current = phrases[phraseIndex];
+    var current = phrases[phraseIndex];
 
     if (isDeleting) {
-      charIndex--;
-      typedEl.textContent = current.substring(0, charIndex);
+      charIndex = charIndex - 1;
     } else {
-      charIndex++;
-      typedEl.textContent = current.substring(0, charIndex);
+      charIndex = charIndex + 1;
     }
+
+    typedEl.textContent = current.substring(0, charIndex);
 
     if (!isDeleting && charIndex === current.length) {
       isDeleting = true;
@@ -572,29 +563,27 @@
     if (isDeleting && charIndex === 0) {
       isDeleting = false;
       phraseIndex = (phraseIndex + 1) % phrases.length;
-      setTimeout(typeLoop, 400);
+      setTimeout(typeLoop, 500);
       return;
     }
 
-    setTimeout(typeLoop, isDeleting ? 28 : 65);
+    setTimeout(typeLoop, isDeleting ? 30 : 70);
   }
 
-  setTimeout(typeLoop, 900);
+  setTimeout(typeLoop, 1000);
 
 
-  /* ── EMAIL SUBMISSION ───────────────────────── */
-  async function submitEmail(email, wrapperId, successId, btnEl) {
-    const originalText = btnEl.textContent;
-    btnEl.textContent = '…';
+  /* ── EMAIL SUBMISSION ── */
+  function submitEmail(email, wrapperId, successId, btnEl) {
+    btnEl.textContent = '...';
     btnEl.disabled = true;
 
-    try {
-      const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-
+    fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email })
+    })
+    .then(function(res) {
       if (res.ok) {
         document.getElementById(wrapperId).style.display = 'none';
         document.getElementById(successId).style.display = 'block';
@@ -602,23 +591,27 @@
         btnEl.textContent = 'Try again';
         btnEl.disabled = false;
       }
-    } catch {
+    })
+    .catch(function() {
       btnEl.textContent = 'Try again';
       btnEl.disabled = false;
-    }
+    });
   }
 
   function handleSignup(e) {
     e.preventDefault();
-    const email = document.getElementById('email-input').value;
-    const btn = e.target.querySelector('button');
+    var email = document.getElementById('email-input').value;
+    var btn = document.getElementById('signup-form').querySelector('button');
     submitEmail(email, 'signup-form-wrapper', 'success-msg', btn);
   }
 
   function handleFooterSignup(e) {
     e.preventDefault();
-    const email = document.getElementById('footer-email-input').value;
-    const btn = e.target.querySelector('button');
+    var email = document.getElementById('footer-email-input').value;
+    var btn = document.getElementById('footer-signup-form').querySelector('button');
     submitEmail(email, 'footer-form-wrapper', 'footer-success-msg', btn);
   }
 </script>
+
+</body>
+</html>
