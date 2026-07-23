@@ -375,6 +375,21 @@
     color: var(--text-muted);
   }
 
+  .footer-links {
+    display: flex;
+    gap: 16px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .footer-links a:hover { color: var(--heading); }
+
   /* SUCCESS STATE */
   .success-msg {
     display: none;
@@ -396,7 +411,7 @@
     .section { padding: 60px 20px; }
     .signup-form { flex-direction: column; }
     .signup-btn { width: 100%; }
-    footer { flex-direction: column; gap: 8px; text-align: center; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
   }
 </style>
 </head>
@@ -525,6 +540,11 @@
 
 <footer>
   <span class="logo">Gather</span>
+  <ul class="footer-links">
+    <li><a href="/privacy">Privacy</a></li>
+    <li><a href="/terms">Terms</a></li>
+    <li><a href="/support">Support</a></li>
+  </ul>
   <p>© 2026 Gather. London.</p>
 </footer>
 

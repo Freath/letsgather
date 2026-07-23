@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of service - Gather</title>
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #C4673A;
+    --primary-hover: #D4784D;
+    --primary-dark: #7A3C1E;
+    --accent: #4A8C6E;
+    --surface: #F7F2EC;
+    --surface-raised: #EDE7DD;
+    --border: #D6CFC4;
+    --heading: #2C2820;
+    --text: #4A4540;
+    --text-secondary: #7A736A;
+    --text-muted: #B0A89C;
+    --dark-surface: #2C2820;
+  }
+
+  body {
+    font-family: 'Figtree', sans-serif;
+    font-weight: 400;
+    background: var(--surface);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .nav-logo { font-size: 22px; font-weight: 500; color: var(--primary); letter-spacing: -0.3px; text-decoration: none; }
+
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 14px; font-weight: 400; color: var(--text-secondary); text-decoration: none; transition: color 0.15s ease; }
+  .nav-links a:hover { color: var(--heading); }
+  .nav-links a.current { color: var(--primary); font-weight: 500; }
+
+  main { max-width: 720px; margin: 0 auto; padding: 72px 24px 96px; }
+
+  .eyebrow { display: inline-block; font-size: 12px; font-weight: 500; color: var(--primary); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+
+  h1 { font-size: clamp(32px, 5vw, 44px); font-weight: 500; color: var(--heading); line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 12px; }
+
+  .updated { font-size: 13px; color: var(--text-muted); margin-bottom: 48px; }
+
+  h2 { font-size: 21px; font-weight: 500; color: var(--heading); margin-top: 48px; margin-bottom: 16px; padding-top: 40px; border-top: 1px solid var(--border); }
+  section:first-of-type h2 { border-top: none; padding-top: 0; margin-top: 8px; }
+
+  h3 { font-size: 16px; font-weight: 500; color: var(--heading); margin-top: 28px; margin-bottom: 8px; }
+
+  p { font-size: 15.5px; line-height: 1.75; color: var(--text); margin-bottom: 16px; max-width: 65ch; }
+
+  ul, ol { margin: 0 0 16px 22px; }
+  li { font-size: 15.5px; line-height: 1.75; color: var(--text); margin-bottom: 8px; }
+
+  a { color: var(--primary); }
+  a:hover { color: var(--primary-hover); }
+
+  .callout { background: var(--surface-raised); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin: 24px 0; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .placeholder { display: inline-block; background: #FDF0EA; color: var(--primary-dark); padding: 1px 8px; border-radius: 6px; font-weight: 500; border: 1px dashed var(--primary); font-size: 0.95em; }
+
+  footer { padding: 32px 40px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 12px; }
+  footer .logo { font-size: 16px; font-weight: 500; color: var(--primary); text-decoration: none; }
+  .footer-links { display: flex; gap: 16px; list-style: none; }
+  .footer-links a { font-size: 13px; color: var(--text-secondary); text-decoration: none; }
+  .footer-links a:hover { color: var(--heading); }
+  footer p { font-size: 12px; color: var(--text-muted); }
+
+  @media (max-width: 600px) {
+    nav { padding: 16px 20px; }
+    .nav-links { gap: 16px; }
+    main { padding: 48px 20px 72px; }
+    h2 { padding-top: 28px; margin-top: 32px; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Gather</a>
+  <ul class="nav-links">
+    <li><a href="/privacy">Privacy</a></li>
+    <li><a href="/terms" class="current">Terms</a></li>
+    <li><a href="/support">Support</a></li>
+  </ul>
+</nav>
+
+<main>
+  <p class="eyebrow">Legal</p>
+  <h1>Terms of service</h1>
+  <p class="updated">Last updated 23 July 2026. This is a draft prepared for internal review and has not yet been checked by a lawyer.</p>
+
+  <section>
+    <h2>Acceptance and eligibility</h2>
+    <p>By creating an account or using Gather, you agree to these terms. If you don't agree to them, please don't use the service.</p>
+    <p>You must be at least <span class="placeholder">[PLACEHOLDER: minimum age]</span> years old to use Gather.</p>
+  </section>
+
+  <section>
+    <h2>Your account</h2>
+    <p>You're responsible for keeping your login details secure and for anything that happens under your account. Tell us straight away at <a href="mailto:support@letsgather.social">support@letsgather.social</a> if you think someone else has access to it.</p>
+    <p>The details you give us, such as your display name, should be accurate and shouldn't impersonate anyone else.</p>
+  </section>
+
+  <section>
+    <h2>Acceptable use</h2>
+    <p>Gather is built for real friend groups meeting up. When using it, you agree not to:</p>
+    <ul>
+      <li>Harass, threaten, or abuse other users.</li>
+      <li>Misuse another person's location information, including sharing it outside Gather or using it to track someone without their knowledge.</li>
+      <li>Create fake accounts, impersonate someone else, or misrepresent who you are.</li>
+      <li>Scrape, crawl, or extract data from Gather beyond your own normal use of the app.</li>
+      <li>Interfere with or attempt to disrupt Gather's operation or security.</li>
+    </ul>
+    <p>We may suspend or remove accounts that break these rules.</p>
+  </section>
+
+  <section>
+    <h2>Content you upload</h2>
+    <p>You can rate venues and upload photos of them. You keep ownership of anything you upload, but by uploading it you grant Gather a licence to store, display, and distribute it within the app to other users, for as long as your content remains on the service.</p>
+    <p>You confirm that you have the right to upload whatever you upload, and that it doesn't infringe anyone else's rights.</p>
+    <p>We may remove content that breaches these terms, is unlawful, or is reported to us as inaccurate or inappropriate.</p>
+  </section>
+
+  <section>
+    <h2>Venue recommendations and safety</h2>
+    <div class="callout">
+      <p>Gather's venue recommendations are generated from third-party data and automated scoring. They're provided without any warranty as to accuracy, opening hours, accessibility, or suitability for your needs. Places change, close, and get their hours wrong on the internet just as often as anywhere else.</p>
+      <p>You're responsible for your own safety and travel decisions when meeting people in person, including checking a venue is suitable before you go and using your own judgement about anyone you're meeting.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Third-party data</h2>
+    <p>Gather relies on data and services from third parties, including Google (for places, directions, and geocoding) and Mapbox (for map rendering), to power its recommendations. We don't control this data and can't guarantee it's complete or up to date.</p>
+  </section>
+
+  <section>
+    <h2>Service availability</h2>
+    <p>Gather is currently in beta. Features may change, be added, or be removed, and we don't guarantee any particular level of uptime or availability.</p>
+  </section>
+
+  <section>
+    <h2>Suspension and termination</h2>
+    <p>You can stop using Gather and delete your account at any time, directly in the app. We may suspend or terminate your access if you breach these terms, or if we reasonably believe your account poses a risk to Gather or other users. Where practical, we'll tell you why.</p>
+  </section>
+
+  <section>
+    <h2>Liability</h2>
+    <p>Nothing in these terms limits or excludes our liability for death or personal injury caused by our negligence, for fraud or fraudulent misrepresentation, or for anything else that can't lawfully be limited or excluded under English law. Nothing in these terms affects your statutory rights as a consumer.</p>
+    <p>Subject to that, Gather is provided "as is" during this beta period, and to the fullest extent permitted by law we aren't liable for indirect or consequential losses arising from your use of the service.</p>
+  </section>
+
+  <section>
+    <h2>Changes to these terms</h2>
+    <p>We may update these terms from time to time. If we make a material change, we'll let you know in the app before it takes effect. Continuing to use Gather after a change takes effect means you accept the updated terms.</p>
+  </section>
+
+  <section>
+    <h2>Governing law</h2>
+    <p>These terms are governed by the laws of England and Wales, and the courts of England and Wales have exclusive jurisdiction over any dispute arising from them.</p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>Questions about these terms: <a href="mailto:support@letsgather.social">support@letsgather.social</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <a href="/" class="logo">Gather</a>
+  <ul class="footer-links">
+    <li><a href="/privacy">Privacy</a></li>
+    <li><a href="/terms">Terms</a></li>
+    <li><a href="/support">Support</a></li>
+  </ul>
+  <p>© 2026 Gather. London.</p>
+</footer>
+
+</body>
+</html>

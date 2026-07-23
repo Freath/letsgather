@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy policy - Gather</title>
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #C4673A;
+    --primary-hover: #D4784D;
+    --primary-dark: #7A3C1E;
+    --accent: #4A8C6E;
+    --surface: #F7F2EC;
+    --surface-raised: #EDE7DD;
+    --border: #D6CFC4;
+    --heading: #2C2820;
+    --text: #4A4540;
+    --text-secondary: #7A736A;
+    --text-muted: #B0A89C;
+    --dark-surface: #2C2820;
+  }
+
+  body {
+    font-family: 'Figtree', sans-serif;
+    font-weight: 400;
+    background: var(--surface);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .nav-logo { font-size: 22px; font-weight: 500; color: var(--primary); letter-spacing: -0.3px; text-decoration: none; }
+
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 14px; font-weight: 400; color: var(--text-secondary); text-decoration: none; transition: color 0.15s ease; }
+  .nav-links a:hover { color: var(--heading); }
+  .nav-links a.current { color: var(--primary); font-weight: 500; }
+
+  main { max-width: 720px; margin: 0 auto; padding: 72px 24px 96px; }
+
+  .eyebrow { display: inline-block; font-size: 12px; font-weight: 500; color: var(--primary); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+
+  h1 { font-size: clamp(32px, 5vw, 44px); font-weight: 500; color: var(--heading); line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 12px; }
+
+  .updated { font-size: 13px; color: var(--text-muted); margin-bottom: 48px; }
+
+  h2 { font-size: 21px; font-weight: 500; color: var(--heading); margin-top: 48px; margin-bottom: 16px; padding-top: 40px; border-top: 1px solid var(--border); }
+  section:first-of-type h2 { border-top: none; padding-top: 0; margin-top: 8px; }
+
+  h3 { font-size: 16px; font-weight: 500; color: var(--heading); margin-top: 28px; margin-bottom: 8px; }
+
+  p { font-size: 15.5px; line-height: 1.75; color: var(--text); margin-bottom: 16px; max-width: 65ch; }
+
+  ul, ol { margin: 0 0 16px 22px; }
+  li { font-size: 15.5px; line-height: 1.75; color: var(--text); margin-bottom: 8px; }
+
+  a { color: var(--primary); }
+  a:hover { color: var(--primary-hover); }
+
+  .callout { background: var(--surface-raised); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin: 24px 0; }
+  .callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+
+  .summary-list { background: var(--surface-raised); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; margin-bottom: 8px; }
+  .summary-list li { margin-bottom: 10px; }
+  .summary-list li:last-child { margin-bottom: 0; }
+
+  .placeholder { display: inline-block; background: #FDF0EA; color: var(--primary-dark); padding: 1px 8px; border-radius: 6px; font-weight: 500; border: 1px dashed var(--primary); font-size: 0.95em; }
+
+  table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+  th, td { text-align: left; font-size: 14.5px; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--text-secondary); font-weight: 500; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  footer { padding: 32px 40px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 12px; }
+  footer .logo { font-size: 16px; font-weight: 500; color: var(--primary); text-decoration: none; }
+  .footer-links { display: flex; gap: 16px; list-style: none; }
+  .footer-links a { font-size: 13px; color: var(--text-secondary); text-decoration: none; }
+  .footer-links a:hover { color: var(--heading); }
+  footer p { font-size: 12px; color: var(--text-muted); }
+
+  @media (max-width: 600px) {
+    nav { padding: 16px 20px; }
+    .nav-links { gap: 16px; }
+    main { padding: 48px 20px 72px; }
+    h2 { padding-top: 28px; margin-top: 32px; }
+    footer { flex-direction: column; text-align: center; }
+    table, thead, tbody, th, td, tr { display: block; }
+    thead { display: none; }
+    td { border-bottom: none; padding: 4px 0; }
+    tr { padding-bottom: 14px; border-bottom: 1px solid var(--border); margin-bottom: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Gather</a>
+  <ul class="nav-links">
+    <li><a href="/privacy" class="current">Privacy</a></li>
+    <li><a href="/terms">Terms</a></li>
+    <li><a href="/support">Support</a></li>
+  </ul>
+</nav>
+
+<main>
+  <p class="eyebrow">Legal</p>
+  <h1>Privacy policy</h1>
+  <p class="updated">Last updated 23 July 2026. This is a draft prepared for internal review and has not yet been checked by a lawyer.</p>
+
+  <ul class="summary-list">
+    <li>We never track your location in the background. There is no continuous location tracking anywhere in Gather.</li>
+    <li>Your location is only captured once, at the moment you accept a meetup invite, so we can work out a fair place to meet.</li>
+    <li>Friends can only see your pin while you've accepted a shared meetup, and it disappears automatically after 4 hours.</li>
+    <li>You can delete your account and your data at any time, directly in the app.</li>
+    <li>We don't sell your data, and we don't use it for third-party advertising.</li>
+  </ul>
+
+  <section>
+    <h2>Who we are</h2>
+    <p>Gather is a service that helps friend groups find a fair place to meet. This policy explains what personal data Gather collects, why, and what rights you have over it.</p>
+    <p>Gather is provided by <span class="placeholder">[PLACEHOLDER: legal entity, sole trader legal name, or limited company name, company number and registered office address]</span>, who is the data controller for the personal data described in this policy.</p>
+    <p>You can contact us about anything to do with your data at <a href="mailto:support@letsgather.social">support@letsgather.social</a>, or by post at <span class="placeholder">[PLACEHOLDER: postal address for data protection contact]</span>.</p>
+  </section>
+
+  <section>
+    <h2>What information we collect</h2>
+
+    <h3>Account</h3>
+    <p>Your email address, display name, avatar image, and whether you've set a password.</p>
+
+    <h3>Preferences</h3>
+    <p>Your home location (as coordinates), your preferred way of getting around, whether you prefer independent venues over chains, your notification and privacy settings, and whether other users can find you by searching.</p>
+
+    <h3>Accessibility</h3>
+    <p>Whether you've told us you need accessible venues. This is special category data under UK GDPR, and we handle it separately below in "Accessibility information".</p>
+
+    <h3>Saved locations</h3>
+    <p>Any places you choose to save, such as home or work, including a label, coordinates, and postcode.</p>
+
+    <h3>Meetups and location</h3>
+    <p>Which meetups you're part of, your status in each one, the location you shared when you accepted an invite, and your calculated travel time to the venue. See "How location works" below for the detail that matters here.</p>
+
+    <h3>Your social graph</h3>
+    <p>Your friendships and group memberships within Gather.</p>
+
+    <h3>Content you create</h3>
+    <p>Venue ratings and photos you choose to upload.</p>
+
+    <h3>Notifications</h3>
+    <p>Your push notification subscription details (an endpoint and basic device information), so we can deliver notifications to the right device.</p>
+
+    <h3>Usage data</h3>
+    <p>First-party analytics events recorded within Gather itself, so we can understand which features are used and fix problems. This is not shared with third parties for advertising, and is not sold.</p>
+  </section>
+
+  <section>
+    <h2>How location works</h2>
+    <p>Gather's location model is deliberately narrow, and it's worth being specific about it because it's genuinely more limited than most people assume.</p>
+    <p><strong>There is no continuous location tracking.</strong> Gather does not run in the background monitoring where you are. Your location is only captured once: at the moment you accept a meetup invite. That single point is used to calculate a fair midpoint for the group and to estimate everyone's travel time to candidate venues.</p>
+    <p>Once you've accepted a meetup, your pin is visible to the other people in that meetup, and only to them, for up to 4 hours after you responded. After 4 hours, your pin disappears automatically, even if the meetup is still upcoming.</p>
+    <p>Separately, you can choose to save a home location and any number of named saved locations (like "home" or "the office"). These are provided by you directly, are used to help suggest starting points and routes, and are not shown to other users unless you use them as your location when accepting a meetup.</p>
+  </section>
+
+  <section>
+    <h2>Accessibility information</h2>
+    <div class="callout">
+      <p>If you turn on the accessibility preference in your settings, Gather uses it to filter and prioritise venues that are more likely to be accessible to you. Because this can reveal information about a health-related need, UK GDPR treats it as "special category data", which requires a higher bar than ordinary personal data.</p>
+      <p>This preference is entirely optional, off by default, used only for filtering venue results, and is not shown to other users. We rely on your explicit consent as the lawful basis for processing it <span class="placeholder">[PLACEHOLDER: to confirm with legal review]</span>, which means you can turn it off at any time in your settings, and we'll stop using it immediately.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Why we process your data</h2>
+    <table>
+      <thead><tr><th>Purpose</th><th>Lawful basis</th></tr></thead>
+      <tbody>
+        <tr><td data-label="Purpose">Creating and running your account</td><td data-label="Basis">Necessary to perform our contract with you</td></tr>
+        <tr><td>Calculating fair meetup locations and travel times</td><td>Necessary to perform our contract with you</td></tr>
+        <tr><td>Accessibility filtering</td><td>Your explicit consent</td></tr>
+        <tr><td>Sending push notifications you've asked for</td><td>Consent (via device permission) and contract</td></tr>
+        <tr><td>Understanding and improving how Gather is used</td><td>Legitimate interests, balanced against your privacy</td></tr>
+        <tr><td>Keeping Gather secure and preventing abuse</td><td>Legitimate interests</td></tr>
+        <tr><td>Responding to support requests</td><td>Contract and legitimate interests</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Who we share your data with</h2>
+    <p>Other users see a limited amount about you: your friends can see your profile (name and avatar), and anyone you share a meetup with can see your pin under the conditions described above.</p>
+    <p>We use a small number of service providers ("processors") to run Gather. Each only receives the data it needs to do its job, and none are permitted to use it for their own purposes.</p>
+    <table>
+      <thead><tr><th>Processor</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td data-label="Processor">Supabase</td><td data-label="Role">Authentication and file storage</td></tr>
+        <tr><td>Railway</td><td>Application hosting, database, Redis, and background jobs</td></tr>
+        <tr><td>Vercel</td><td>Frontend hosting</td></tr>
+        <tr><td>Google Maps Platform</td><td>Places, directions, and geocoding</td></tr>
+        <tr><td>Mapbox</td><td>Map rendering</td></tr>
+        <tr><td>Postmark</td><td>Transactional and account-recovery email</td></tr>
+        <tr><td>Anthropic</td><td>Generating venue explanation copy <span class="placeholder">[PLACEHOLDER: to confirm whether venue data only, or any personal data, is sent]</span></td></tr>
+        <tr><td>Open-Meteo</td><td>Weather and seasonality data</td></tr>
+        <tr><td>Sentry</td><td>Error reporting, configured with EU data residency</td></tr>
+        <tr><td>Apple Push Notification service</td><td>Delivering push notifications on iOS</td></tr>
+      </tbody>
+    </table>
+    <p>We do not sell your personal data, and we do not share it with third parties for their own advertising or marketing purposes.</p>
+  </section>
+
+  <section>
+    <h2>International transfers</h2>
+    <p>Some of the processors above are based outside the UK, including in the United States. Where we transfer personal data outside the UK, we rely on a legally recognised transfer mechanism with that processor. <span class="placeholder">[PLACEHOLDER: confirm mechanism per processor, UK International Data Transfer Agreement (IDTA) or the UK Addendum to the EU Standard Contractual Clauses]</span>. Contact us if you'd like more detail on the safeguards in place for a specific processor.</p>
+  </section>
+
+  <section>
+    <h2>How long we keep your data</h2>
+    <p><span class="placeholder">[PLACEHOLDER: retention periods to be confirmed]</span>. As a starting point for that decision: we keep account data for as long as your account is active, and meetup and location history for <span class="placeholder">[PLACEHOLDER: period]</span> after a meetup ends. When you delete your account, we follow the process described in "Deleting your account" below.</p>
+  </section>
+
+  <section>
+    <h2>Your rights</h2>
+    <p>Under UK GDPR, you have the right to:</p>
+    <ul>
+      <li><strong>Access</strong> the personal data we hold about you.</li>
+      <li><strong>Rectify</strong> data that's inaccurate or incomplete.</li>
+      <li><strong>Erase</strong> your data (see "Deleting your account" below for the fastest way to do this).</li>
+      <li><strong>Restrict</strong> how we use your data in certain circumstances.</li>
+      <li><strong>Port</strong> your data to another service in a structured, commonly used format.</li>
+      <li><strong>Object</strong> to processing based on legitimate interests.</li>
+      <li><strong>Withdraw consent</strong> at any time, where we rely on consent (such as accessibility filtering or push notifications).</li>
+    </ul>
+    <p>To exercise any of these rights, email <a href="mailto:support@letsgather.social">support@letsgather.social</a>. We'll respond within the timeframe required by law.</p>
+  </section>
+
+  <section>
+    <h2>Deleting your account</h2>
+    <p>You can delete your account directly in the app, without needing to contact us. It's a deliberate two-step process: you'll be asked to type "DELETE" to confirm, and then your account and associated data are removed. This cascades across your data, removes your authentication record, and anonymises historical records (such as past meetups involving other people) rather than leaving them attached to your identity. This is how Gather fulfils your right to erasure.</p>
+  </section>
+
+  <section>
+    <h2>Cookies, local storage and analytics</h2>
+    <p>This website (letsgather.social) doesn't use tracking cookies. If you request early access, your email address is sent to Formspree, a third-party form service, purely to collect it; it isn't used to track you across sites.</p>
+    <p>Within the Gather app, we don't use third-party tracking or advertising tools. We use first-party analytics, recorded directly within Gather, to understand feature usage and fix problems, as described above. If that changes, for example if we add a product analytics tool in future, we'll update this policy before we do.</p>
+  </section>
+
+  <section>
+    <h2>Children</h2>
+    <p>Gather is not intended for use by anyone under <span class="placeholder">[PLACEHOLDER: minimum age]</span>. If we become aware that we've collected personal data from someone younger than this without appropriate consent, we'll delete it.</p>
+  </section>
+
+  <section>
+    <h2>How to complain</h2>
+    <p>If you're unhappy with how we've handled your data, please tell us first at <a href="mailto:support@letsgather.social">support@letsgather.social</a> so we can try to put it right. You also have the right to complain to the UK's data protection regulator:</p>
+    <p>Information Commissioner's Office<br>
+    Wycliffe House, Water Lane, Wilmslow, Cheshire, SK9 5AF<br>
+    Helpline: 0303 123 1113<br>
+    <a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a></p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>Questions about this policy or your data: <a href="mailto:support@letsgather.social">support@letsgather.social</a>.</p>
+  </section>
+
+  <section>
+    <h2>Changes to this policy</h2>
+    <p>We may update this policy as Gather changes. If we make a material change, we'll let you know in the app before it takes effect. The date at the top of this page always reflects the latest version.</p>
+  </section>
+</main>
+
+<footer>
+  <a href="/" class="logo">Gather</a>
+  <ul class="footer-links">
+    <li><a href="/privacy">Privacy</a></li>
+    <li><a href="/terms">Terms</a></li>
+    <li><a href="/support">Support</a></li>
+  </ul>
+  <p>© 2026 Gather. London.</p>
+</footer>
+
+</body>
+</html>
